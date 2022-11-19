@@ -44,4 +44,22 @@ plot(density(waveMean$`mean(wavelength)`))
 
 waveMean = mendota %>% group_by(month) %>%  summarize(mean(wavelength))
 
+
+
+# work to calculate the mode of the modes so that each months is weighted equally
+
+
+wiMonthModes = wingra %>% 
+  filter(month > 1) %>% 
+  group_by(month)  %>% 
+  summarize(modeWave = mlv(wavelength, method = "meanshift"))
+ 
+wiMonthModes[12, ] = list(1, 513.51)   
+
+
+wiMonMode = mlv(wiMonthModes$modeWave, method = "meanshift")
+mlv(wingra$wavelength, method = "meanshift")
+wiMonMode
+
+sapply(wingra$wavelength, FUN = "mean")
                                         
